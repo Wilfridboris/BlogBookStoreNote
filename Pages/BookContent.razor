@@ -1,0 +1,47 @@
+@page "/bookcontent/{bookId:int}"
+@using BlogBookApp.Data
+@inject BookService BookService
+@inject NavigationManager Navigation
+
+
+@code{
+    [Parameter] public int bookId{get;set;}
+    private Book? book;
+    private int currentPage=0;
+
+     protected override void OnInitialized()
+    {
+        book = BookService.GetBookId(bookId);
+    }
+
+    private void NextPage(){
+        if(currentPage<book?.Pages?.Count-1){
+            currentPage++;
+        }
+    }
+
+    private void PreviousPage()
+    {
+        if (currentPage > 0)
+        {
+            currentPage--;
+        }
+    }
+
+    
+
+
+}
+ <div class="container-fluid px-5 mt-5">
+    <h2>Reading: @book?.Title</h2>
+
+    <div class="book-page">
+        <p>@book?.Pages?[currentPage]</p>
+    </div>
+
+    <div class="page-navigation">
+        <button @onclick="PreviousPage" disabled="@(currentPage == 0)">Previous</button>
+        <span>Page @(currentPage + 1) of @book?.Pages?.Count</span>
+        <button @onclick="NextPage" disabled="@(currentPage == book?.Pages?.Count - 1)">Next</button>
+    </div> 
+ </div>

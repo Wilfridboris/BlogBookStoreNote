@@ -1,0 +1,43 @@
+@page "/bookdetail/{bookId:int}"
+@using BlogBookApp.Data
+@inject BookService BookService
+@inject NavigationManager Navigation
+
+@code {
+    [Parameter] public int bookId{get;set;}
+    private Book? book;
+    protected override void OnInitialized(){
+        book= BookService.GetBookId(bookId);
+    }
+}
+@if (book == null)
+{
+    <div class="no-book-found">
+        <h2>No Book Found</h2>
+        <p>We couldn't find the book you're looking for. Please try again or explore other books.</p>
+    </div>
+}else{
+    <div class="container-fluid mt-4 px-5">
+    <h2>@book?.Title</h2>
+    <div class="book-details">
+    <img src="@book?.CoverImageUrl" alt="@book?.Title" class="book-cover-large" />
+        <div class="book-info">
+            <p><strong>Author:</strong> @book?.Author</p>
+            <p><strong>Publication Date:</strong> @book?.PublicationDate.ToShortDateString()</p>
+            <p><strong>Description:</strong> @book?.Description</p>
+        </div>
+    </div>
+    <button @onclick="NavigateToContent">Read Book</button>
+    </div>
+
+
+}
+
+
+
+@code {
+    private void NavigateToContent()
+    {
+        Navigation.NavigateTo($"/bookcontent/{bookId}");
+    }
+}

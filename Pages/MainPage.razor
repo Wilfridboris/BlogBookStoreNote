@@ -1,0 +1,44 @@
+@page "/"
+@using BlogBookApp.Data
+@inject BookService BookService
+@inject NavigationManager Navigation
+
+<div class="book-banner position-relative text-center" >
+    <img class="object-fit-cover" src="https://images.hdqwalls.com/download/girl-reading-book-lying-on-back-outdoors-kn-1920x1080.jpg" style="width: 100%; height: 500px;">
+    <div class="position-absolute top-50 start-50 translate-middle text-white">
+        <h1 class="display-4 fw-bold">Find A book that you like</h1>
+        <p class="lead">Discover you favorites notes save from you books.</p>
+        <a href="#" class="btn btn-light btn-lg">Get Started</a>
+    </div>
+</div>
+
+
+<div class="container-fluid px-5">
+    <h1 class="text-center fs-1"> Book Notes databases</h1>
+    <div >
+        
+        @foreach (var category in BookService.GetCategories())
+        {
+            <h2  class="fs-4 my-2">@category.Name</h2>
+            <div class="d-flex justify-content-start align-items-start flex-wrap">
+                @foreach (var book in category?.Books!)
+                {
+                    
+                    <div class="book-card m-2" @onclick="() => NavigateToBookDetail(book.Id)" style="cursor: pointer;">
+                        <img src="@book.CoverImageUrl" alt="@book.Title" class="book-cover" />
+                        <h3>@book.Title</h3>
+                        <p>@book.Author</p>
+                    @*  <button >View Details</button> *@
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code{
+    private void NavigateToBookDetail(int bookId)
+    {
+        Navigation.NavigateTo($"/bookdetail/{bookId}");
+    }
+}
