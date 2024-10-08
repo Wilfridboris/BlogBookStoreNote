@@ -33,7 +33,7 @@ jobs:
         run: dotnet publish BlogBookApp.csproj --configuration Release --output build
         
       - name: Add .nojekyll file
-        run: touch release/wwwroot/.nojekyll
+        run: touch build/wwwroot/.nojekyll
       
       - name: Change base-tag in index.html from / to BlogBookApp
         run: sed -i 's/<base href="\/" \/>/<base href="\/BlogBookStoreNote\/" \/>/g' build/wwwroot/index.html
