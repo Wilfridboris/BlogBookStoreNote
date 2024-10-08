@@ -30,7 +30,7 @@ jobs:
         run: dotnet restore
 
       - name: Build Blazor WebAssembly
-        run: dotnet publish --configuration Release --output build
+        run: dotnet publish BlogBookApp.csproj --configuration Release --output build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
