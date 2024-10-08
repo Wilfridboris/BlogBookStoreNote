@@ -1,4 +1,4 @@
-@page "/BlogBookStoreNote/bookdetail/{bookId:int}"
+@page "/bookdetail/{bookId:int}"
 @using BlogBookApp.Data
 @inject BookService BookService
 @inject NavigationManager Navigation
@@ -38,6 +38,6 @@
 @code {
     private void NavigateToContent()
     {
-        Navigation.NavigateTo($"/bookcontent/{bookId}");
+        Navigation.NavigateTo($"/BlogBookStoreNote/bookcontent/{bookId}");
     }
 }
