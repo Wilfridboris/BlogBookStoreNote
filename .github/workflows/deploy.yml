@@ -39,7 +39,7 @@ jobs:
         run: sed -i 's/<base href="\/" \/>/<base href="\/BlogBookStoreNote\/" \/>/g' build/wwwroot/index.html
 
       - name: copy index.html to 404.html
-        run: cp release/wwwroot/index.html build/wwwroot/404.html
+        run: cp build/wwwroot/index.html build/wwwroot/404.html
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
