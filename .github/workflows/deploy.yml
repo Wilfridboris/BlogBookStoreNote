@@ -31,7 +31,13 @@ jobs:
 
       - name: Build Blazor WebAssembly
         run: dotnet publish BlogBookApp.csproj --configuration Release --output build
-
+        
+      - name: Add .nojekyll file
+      - run: touch release/wwwroot/.nojekyll
+      
+      - name: Change base-tag in index.html from / to BlogBookApp
+      - run: sed -i 's/<base href="\/" \/>/<base href="\/BlogBookStoreNote\/" \/>/g' build/wwwroot/index.html
+      
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
