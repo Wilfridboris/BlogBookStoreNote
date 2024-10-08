@@ -109,7 +109,7 @@ namespace BlogBookApp.Data{
                     [
                         new Book
                         {
-                            Id = 1,
+                            Id = 6,
                             Title = "Mandela",
                             Author = "Mandela",
                             PublicationDate = new DateTime(2023, 6, 1),
@@ -127,7 +127,7 @@ namespace BlogBookApp.Data{
                         },
                         new Book
                         {
-                            Id = 2,
+                            Id = 7,
                             Title = "Pele: The Autobiography",
                             Author = "Pele",
                             PublicationDate = new DateTime(2023, 6, 1),
